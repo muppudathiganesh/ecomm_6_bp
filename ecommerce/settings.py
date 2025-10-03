@@ -57,7 +57,7 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecommerce_db',
-        'USER': 'root',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'),  # or postgresql
+        'NAME': os.getenv('DB_NAME', 'ecommerce_db'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '123'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
