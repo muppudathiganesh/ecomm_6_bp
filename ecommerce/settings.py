@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qfr=-t#$==vk7m1gn24q7fbu!yup)6()@43tm0gt5!9^-!!&46
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecomm-6-bp.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["*"]
 
 
 
@@ -63,8 +63,6 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
-                  'django.template.context_processors.debug',
-                    'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -76,16 +74,15 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
+# https://docs.djangoproject.com/en/5.2/ref/settings/#database
+    DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'),  # or postgresql
-        'NAME': os.getenv('DB_NAME', 'ecommerce_db'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', '123'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '3306'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ecommerce_db',
+        'USER': 'root',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
