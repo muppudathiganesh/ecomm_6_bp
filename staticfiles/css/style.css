@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    font-size: 20px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav a, header nav span {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Always 3 columns */
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    border: #007bff 2px solid;
+}
+
+.product-card img {
+    width: 100%;
+    max-width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+.checkout-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.checkout-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 🔹 Responsive styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    header nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    header nav.active {
+        display: flex;
+    }
+
+    header nav a, header nav span {
+        margin: 10px 0;
+    }
+
+  .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+
+    .product-card img {
+        height: 180px;
+    }
+}
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* 1 column on small mobile screens */
+    }
+}

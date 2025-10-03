@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart - My E-Commerce Store</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+       /* General table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.qty-btn {
+    padding: 4px 8px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.remove-btn {
+    padding: 4px 8px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn.checkout-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.btn.checkout-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none; /* hide table headers on mobile */
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 10px;
+        text-align: left;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
+
+    .qty-btn, .remove-btn {
+        margin: 2px 5px;
+        padding: 6px 10px;
+    }
+
+    .btn.checkout-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cart</h1>
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        {% if items %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+          <tbody>
+    {% for item in items %}
+    <tr>
+        <td data-label="Product">{{ item.product.name }}</td>
+        <td data-label="Price">₹{{ item.product.price }}</td>
+        <td data-label="Quantity">
+            <form method="POST" action="{% url 'update_cart' item.id %}">
+                {% csrf_token %}
+                <button type="submit" name="action" value="decrease" class="qty-btn">-</button>
+                {{ item.quantity }}
+                <button type="submit" name="action" value="increase" class="qty-btn">+</button>
+            </form>
+        </td>
+        <td data-label="Subtotal">₹{{ item.product.price|floatformat:2|add:item.quantity }}</td>
+        <td data-label="Actions">
+            <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                {% csrf_token %}
+                <button type="submit" class="remove-btn">Remove</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+        </table>
+        <h3>Total: ₹{{ total }}</h3>
+        <a class="btn checkout-btn" href="{% url 'checkout' %}">Proceed to Checkout</a>
+        {% else %}
+        <p>Your cart is empty.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
